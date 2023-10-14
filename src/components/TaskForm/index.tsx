@@ -1,4 +1,4 @@
-import { Form, Input, Select, Button, Space } from "antd";
+import { Form, Input, Select, Button, Flex } from "antd";
 
 export type ITaskPriorityEnum = "HIGH" | "MEDIUM" | "LOW";
 
@@ -52,14 +52,14 @@ export function TaskForm({ id, onCancel }: ITaskFormProps) {
       </Form.Item>
 
       <Form.Item>
-        <Space>
-          <Button type="primary" htmlType="submit">
-            {id ? "Atualizar" : "Criar"}
-          </Button>
+        <Flex justify="flex-end" gap={8}>
           <Button onClick={onCancel} htmlType="reset">
             {onCancel ? "Cancelar" : "Limpar"}
           </Button>
-        </Space>
+          <Button type="primary" htmlType="submit">
+            {id ? "Atualizar" : "Criar"}
+          </Button>
+        </Flex>
       </Form.Item>
     </Form>
   );
