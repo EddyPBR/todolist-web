@@ -1,5 +1,7 @@
-import { List, Button } from "antd";
+import { List, Button, Modal } from "antd";
 import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
+import { TaskForm } from "../TaskForm";
+import { useState } from "react";
 
 interface ITask {
   id: string; // UUID
@@ -69,33 +71,42 @@ const TASKS: ITask[] = [
 ];
 
 export function TaskList() {
-  function onHandleClickUpdate() {
-    alert("Necessário desenvolver feat. de atualizar task");
-  }
+  const [selectedTaskToUpdate, setSelectedTaskToUpdate] = useState<ITask | null>(null);
 
   function onHandleClickDelete() {
     alert("Necessário desenvolver feat. de apagar task");
   }
 
   return (
-    <List<ITask>
-      itemLayout="horizontal"
-      dataSource={TASKS}
-      renderItem={(task) => (
-        <List.Item
-          actions={[
-            <Button size="small" type="text" onClick={onHandleClickUpdate}>
-              <EditTwoTone style={{ fontSize: "1.125rem" }} twoToneColor="#faad14" />
-            </Button>,
-            <Button size="small" type="text" onClick={onHandleClickDelete}>
-              <DeleteTwoTone style={{ fontSize: "1.125rem" }} twoToneColor="#f5222d" />
-            </Button>,
-          ]}
-        >
-          <List.Item.Meta title={<a href="#">{task.title}</a>} description={task.description} />
-        </List.Item>
-      )}
-      style={{ width: "100%" }}
-    />
+    <>
+      <List<ITask>
+        itemLayout="horizontal"
+        dataSource={TASKS}
+        renderItem={(task) => (
+          <List.Item
+            actions={[
+              <Button size="small" type="text" onClick={() => setSelectedTaskToUpdate(task)}>
+                <EditTwoTone style={{ fontSize: "1.125rem" }} twoToneColor="#faad14" />
+              </Button>,
+              <Button size="small" type="text" onClick={onHandleClickDelete}>
+                <DeleteTwoTone style={{ fontSize: "1.125rem" }} twoToneColor="#f5222d" />
+              </Button>,
+            ]}
+          >
+            <List.Item.Meta title={<a href="#">{task.title}</a>} description={task.description} />
+          </List.Item>
+        )}
+        style={{ width: "100%" }}
+      />
+
+      <Modal
+        title="Alterar tarefa"
+        open={!!selectedTaskToUpdate}
+        onCancel={() => setSelectedTaskToUpdate(null)}
+        footer={null}
+      >
+        <TaskForm id={selectedTaskToUpdate?.id} onCancel={() => setSelectedTaskToUpdate(null)} />
+      </Modal>
+    </>
   );
 }
