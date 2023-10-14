@@ -1,29 +1,23 @@
-import { Flex } from "antd";
-import { CreateUserForm } from "./components/CreateUserForm";
-import { LoginForm } from "./components/LoginForm";
-import { TaskList } from "./components/TaskList";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { TasksPage } from "./pages/TasksPage";
+import { HomePage } from "./pages/HomePage";
+import { RegisterPage } from "./pages/RegisterPage";
 
 const ROUTER = createBrowserRouter([
   {
     path: "/",
-    element: <LoginForm />,
+    element: <HomePage />,
   },
   {
     path: "/cadastro",
-    element: <CreateUserForm />,
+    element: <RegisterPage />,
   },
   {
     path: "/tarefas",
-    element: <TaskList />,
+    element: <TasksPage />,
   },
 ]);
 
 export function App() {
-  return (
-    <Flex justify="center" align="center" style={{ height: "calc(100vh - 20px)" }}>
-      <RouterProvider router={ROUTER} />
-    </Flex>
-  );
+  return <RouterProvider router={ROUTER} />;
 }
