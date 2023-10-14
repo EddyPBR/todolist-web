@@ -1,6 +1,7 @@
 import { Flex } from "antd";
 import { CreateUserForm } from "./components/CreateUserForm";
 import { LoginForm } from "./components/LoginForm";
+import { TaskList } from "./components/TaskList";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -15,8 +16,8 @@ const ROUTER = createBrowserRouter([
   },
   {
     path: "/tarefas",
-    element: <h1>Minhas tarefas</h1>
-  }
+    element: <TaskList />,
+  },
 ]);
 
 export function App() {
