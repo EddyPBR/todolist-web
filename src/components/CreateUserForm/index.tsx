@@ -1,4 +1,5 @@
 import { Button, Form, Input } from "antd";
+import { Link } from "react-router-dom";
 
 export interface ICreateUserForm {
   name?: string;
@@ -65,8 +66,11 @@ export function CreateUserForm() {
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Enviar
+          Cadastrar
         </Button>
+        <Link to="/">
+          <Button type="link">Acessar login</Button>
+        </Link>
       </Form.Item>
     </Form>
   );

@@ -1,4 +1,5 @@
 import { Button, Form, Input } from "antd";
+import { Link } from "react-router-dom";
 
 export interface ILoginForm {
   username?: string;
@@ -38,6 +39,9 @@ export function LoginForm() {
         <Button type="primary" htmlType="submit">
           Login
         </Button>
+        <Link to="/cadastro">
+          <Button type="link">Cadastre-se</Button>
+        </Link>
       </Form.Item>
     </Form>
   );
