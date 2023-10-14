@@ -97,7 +97,11 @@ export function TaskList() {
         style={{ width: "100%" }}
       />
 
-      <TaskFormModal task={selectedTaskToUpdate} onCancel={() => setSelectedTaskToUpdate(null)} />
+      <TaskFormModal
+        isOpen={!!selectedTaskToUpdate}
+        task={selectedTaskToUpdate}
+        onCancel={() => setSelectedTaskToUpdate(null)}
+      />
 
       <DeleteTaskModal task={selectedTaskToDelete} onCancel={() => setSelectedTaskToDelete(null)} />
     </>
