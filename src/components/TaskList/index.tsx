@@ -1,7 +1,8 @@
-import { List, Button, Modal } from "antd";
+import { List, Button } from "antd";
 import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
-import { TaskForm } from "../TaskForm";
 import { useState } from "react";
+import { DeleteTaskModal } from "../DeleteTaskModal";
+import { TaskFormModal } from "../TaskFormModal";
 
 interface ITask {
   id: string; // UUID
@@ -72,10 +73,7 @@ const TASKS: ITask[] = [
 
 export function TaskList() {
   const [selectedTaskToUpdate, setSelectedTaskToUpdate] = useState<ITask | null>(null);
-
-  function onHandleClickDelete() {
-    alert("Necessário desenvolver feat. de apagar task");
-  }
+  const [selectedTaskToDelete, setSelectedTaskToDelete] = useState<ITask | null>(null);
 
   return (
     <>
@@ -88,7 +86,7 @@ export function TaskList() {
               <Button size="small" type="text" onClick={() => setSelectedTaskToUpdate(task)}>
                 <EditTwoTone style={{ fontSize: "1.125rem" }} twoToneColor="#faad14" />
               </Button>,
-              <Button size="small" type="text" onClick={onHandleClickDelete}>
+              <Button size="small" type="text" onClick={() => setSelectedTaskToDelete(task)}>
                 <DeleteTwoTone style={{ fontSize: "1.125rem" }} twoToneColor="#f5222d" />
               </Button>,
             ]}
@@ -99,14 +97,9 @@ export function TaskList() {
         style={{ width: "100%" }}
       />
 
-      <Modal
-        title="Alterar tarefa"
-        open={!!selectedTaskToUpdate}
-        onCancel={() => setSelectedTaskToUpdate(null)}
-        footer={null}
-      >
-        <TaskForm id={selectedTaskToUpdate?.id} onCancel={() => setSelectedTaskToUpdate(null)} />
-      </Modal>
+      <TaskFormModal task={selectedTaskToUpdate} onCancel={() => setSelectedTaskToUpdate(null)} />
+
+      <DeleteTaskModal task={selectedTaskToDelete} onCancel={() => setSelectedTaskToDelete(null)} />
     </>
   );
 }
