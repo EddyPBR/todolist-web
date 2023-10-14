@@ -10,13 +10,14 @@ export interface ITask {
 }
 
 export interface ITaskFormModalProps {
+  isOpen: boolean;
   task: ITask | null;
   onCancel: () => void;
 }
 
-export function TaskFormModal({ task, onCancel }: ITaskFormModalProps) {
+export function TaskFormModal({ isOpen, task, onCancel }: ITaskFormModalProps) {
   return (
-    <Modal title="Alterar tarefa" open={!!task} onCancel={onCancel} footer={null}>
+    <Modal title={task ? "Atualizar tarefa" : "Criar tarefa"} open={isOpen} onCancel={onCancel} footer={null}>
       <TaskForm id={task?.id} onCancel={onCancel} />
     </Modal>
   );
