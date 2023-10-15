@@ -1,5 +1,6 @@
 import { Button, Form, Input } from "antd";
 import { Link } from "react-router-dom";
+import { useCreateUser } from "../../hooks/api";
 
 export interface ICreateUserForm {
   name?: string;
@@ -9,9 +10,7 @@ export interface ICreateUserForm {
 }
 
 export function CreateUserForm() {
-  function handleSubmitForm(formData: ICreateUserForm) {
-    alert("Necessário integrar com a API" + "\n" + JSON.stringify(formData));
-  }
+  const { mutate: handleSubmitForm, isLoading } = useCreateUser();
 
   return (
     <Form name="createUser" onFinish={handleSubmitForm} layout="vertical" style={{ width: "100%", maxWidth: 420 }}>
@@ -65,7 +64,7 @@ export function CreateUserForm() {
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Cadastrar
         </Button>
         <Link to="/">
